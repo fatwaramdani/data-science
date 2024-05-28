@@ -15,6 +15,33 @@ colnames(AWH)[c(1, 4,5,6)] <- c("Country", "WH", "GDP", "POP")
 View(AWH)
 
 
+# Create Descriptive Summary Statistic
+# Example 1
+summary(AWH)
+
+# Example 2
+# Calculate summary statistics
+summary_stats <- data.frame(
+  Mean = sapply(AWH[, c("WH", "GDP", "POP")], mean),
+  Median = sapply(AWH[, c("WH", "GDP", "POP")], median),
+  SD = sapply(AWH[, c("WH", "GDP", "POP")], sd),
+  Min = sapply(AWH[, c("WH", "GDP", "POP")], min),
+  Max = sapply(AWH[, c("WH", "GDP", "POP")], max)
+)
+# Print the summary statistics table
+print(summary_stats)
+
+# Example 3
+install.packages("skimr")
+library(skimr)
+skim(AWH)
+
+# Example 4
+install.packages(c("flextable", "janitor"))
+library(flextable)
+library(janitor)
+
+
 # #Remove NA values (not used since any rows with NA values will be removed)
 # AWH <- na.omit(AWH)
 # View(AWH)
