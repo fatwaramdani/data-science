@@ -2,7 +2,7 @@
 setwd("D:/DATA/DATA SCIENCE FOR SOCIAL SCIENCE/DATA/WEEK 7/jpn_adm_2019_shp")
 
 # Install and load required packages
-install.packages(c("sf", "tmap", "leaflet")) # do it if not installed yet
+# install.packages(c("sf", "tmap", "leaflet")) # do it if not installed yet
 library(sf)
 library(dplyr)
 library(ggplot2)
@@ -58,19 +58,14 @@ colnames(japan)[c(1)] <- c("ID")
 # joins data to the shapefile
 # replace values in the dataframe
 library(stringr)
-rep_str = c('Hyōgo'='Hyogo','Kōchi'='Kochi','Ōita'='Oita')
+rep_str = c('Hyōgo'='Hyogo','Kōchi'='Kochi','Ōita'='Oita', 'Gunma'='Gumma')
 japan$ID <- str_replace_all(japan$ID, rep_str)
 
-# Merge data
-merge_data_left <- left_join(japan, japan_data, by= "ID")
-merge_data_right <- right_join(japan, japan_data, by= "ID")
+# Remove all spaces from the "ID" column
+japan$ID <- str_trim(japan$ID)
 
-# joins data to the shapefile
-merge_data_left$POP19[1:47] <- merge_data_right$POP19[1:47]
-merge_data_left$POP10[1:47] <- merge_data_right$POP10[1:47]
-merge_data_left$POPULATION_CHANGE[1:47] <- merge_data_right$POPULATION_CHANGE[1:47]
-
-merge_data <- merge_data_left
+# Merge data to shapefile
+merge_data <- left_join(japan, japan_data, by= "ID")
 
 # 2. DATA VISUALIZATION
 #Creating quick map
