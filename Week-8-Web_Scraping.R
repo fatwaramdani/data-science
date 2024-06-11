@@ -159,6 +159,7 @@ japan_covid$Classification[japan_covid$Cases >= medium_threshold &
 
 # Plot reclass map using tmap
 tm_shape(osm_world) + tm_rgb()+
+  tm_style("natural", frame.lwd=5) +
   tm_shape(japan_covid) + 
   tm_fill("Classification", palette = "Spectral",
           style = "pretty", title = "Classification Cases") +
@@ -178,8 +179,7 @@ tm_shape(osm_world) + tm_rgb()+
           height = 1.5) +
   tm_credits("Data source: multiple sources", fontface = "italic", align = "right") +
   tm_credits("Author: Data Science Class", fontface = "bold", align = "right")+
-  tm_legend(position=c("left", "top"), bg.color="grey80")+
-  tm_style("natural", frame.lwd=5)
+  tm_legend(position=c("left", "top"), bg.color="grey80")
 
 qtm(japan_covid, fill="Cases", projection=4326, inner.margins=0) +
   tm_grid(x = seq(-180, 180, by=10), y=seq(-90,90,by=10), col = "gray70") +
