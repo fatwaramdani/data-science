@@ -22,3 +22,11 @@ plot(inverted_gray_image)
 # Save inverted grayscale image
 save.image(inverted_gray_image, "inverted_gray_image.jpg")
 
+# Plot the original and mirrored images
+par(mfrow = c(1, 2))
+plot(image, main = "Original Image")
+plot(inverted_gray_image, main = "Inverted Grayscale Image")
+
+
+
+
