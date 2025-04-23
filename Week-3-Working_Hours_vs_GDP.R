@@ -65,7 +65,7 @@ library(janitor)
 # # Create a ggplot with a line graph
 # ggplot(multi_country, aes(x = Year, y = POP, color = Country)) +
 #   geom_line() +
-#   labs(x = "Year", y = "GDP", color = "Country")
+#   labs(x = "Year", y = "Population", color = "Country")
 # 
 # # Get the mean Pop growth rate for each country
 # AWH <- AWH[,-c(4,5,7)]
