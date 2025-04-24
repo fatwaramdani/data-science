@@ -10,8 +10,8 @@ library(readr)
 AWH <- read_csv("D:/DATA/DATA SCIENCE FOR SOCIAL SCIENCE/DATA/Working hours/annual-working-hours-vs-gdp-per-capita-pwt.csv")
 View(AWH)
 
-#Rename only the 1st, 4th to 6th column names
-colnames(AWH)[c(1, 4,5,6)] <- c("Country", "WH", "GDP", "POP")
+#Rename only the 1st, 4th to 7th column names
+colnames(AWH)[c(1, 4, 5, 6, 7)] <- c("Country", "WH", "GDP", "POP", "Continent")
 View(AWH)
 
 
@@ -71,6 +71,17 @@ library(janitor)
 # AWH <- AWH[,-c(4,5,7)]
 # AWH <- na.omit(AWH)
 # pop_mean <- data.frame(country = AWH$Country, mean_growth = rowMeans(AWH[, -1], na.rm = TRUE))
+
+# Step 1: Install countrycode if not installed
+if (!require(countrycode)) install.packages("countrycode")
+library(countrycode)
+
+# Step 2: Fill in the empty 'World regions according to OWID' column
+AWH$`Continent` <- ifelse(
+  is.na(AWH$`Continent`) | AWH$`Continent` == "",
+  countrycode(AWH$Country, origin = "country.name", destination = "continent"),
+  AWH$`Continent`
+)
 
 # Create the 1st bubble plot
 ggplot(AWH, aes(x = GDP, y = WH, size = POP, color = Continent)) +
